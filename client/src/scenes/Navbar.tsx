@@ -3,7 +3,6 @@ import FlexBetween from "@/components/FlexBetween";
 import { Link } from "react-router-dom";
 import PixIcon from "@mui/icons-material/Pix";
 import { Typography, Box, useTheme } from "@mui/material";
-import { style } from "@mui/system";
 
 const Navbar = () => {
   const { palette } = useTheme();

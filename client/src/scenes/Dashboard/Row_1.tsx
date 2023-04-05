@@ -1,5 +1,5 @@
 import DashboardBox from "@/components/Dashboard";
-import { useGetKpisQuery, useGetProductsQuery } from "@/state/api";
+import { useGetKpisQuery } from "@/state/api";
 import { useMemo } from "react";
 import { useTheme } from "@mui/material/";
 import {
@@ -21,27 +21,24 @@ import BoxHeader from "@/components/BoxHeader";
 const Row_1 = () => {
   const { palette } = useTheme();
 
-  const { data } = useGetKpisQuery();
-  const { data: getProductResponse } = useGetProductsQuery();
-  console.log("🚀 ~ file: Row_1.tsx:26 ~ products:", getProductResponse);
-  console.log("🚀 ~ file: Row_1.tsx:6 ~ data:", data);
+  const { data: getKpisQuery } = useGetKpisQuery();
 
   const revenue = useMemo(() => {
     return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue }) => {
+      getKpisQuery &&
+      getKpisQuery[0].monthlyData.map(({ month, revenue }) => {
         return {
           name: month.substring(0, 3),
           revenue: revenue,
         };
       })
     );
-  }, [data]);
+  }, [getKpisQuery]);
 
   const revenueExpenses = useMemo(() => {
     return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+      getKpisQuery &&
+      getKpisQuery[0].monthlyData.map(({ month, revenue, expenses }) => {
         return {
           name: month.substring(0, 3),
           revenue: revenue,
@@ -49,12 +46,12 @@ const Row_1 = () => {
         };
       })
     );
-  }, [data]);
+  }, [getKpisQuery]);
 
   const revenueProfit = useMemo(() => {
     return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+      getKpisQuery &&
+      getKpisQuery[0].monthlyData.map(({ month, revenue, expenses }) => {
         return {
           name: month.substring(0, 3),
           revenue: revenue,
@@ -62,7 +59,7 @@ const Row_1 = () => {
         };
       })
     );
-  }, [data]);
+  }, [getKpisQuery]);
   return (
     <>
       <DashboardBox gridArea="a">
